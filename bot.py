@@ -13,13 +13,14 @@ client = discord.Client(intents=intents)
 
 @client.event
 async def on_ready():
+    """This function runs when the bot is connected and ready."""
     print(f'We have logged in as {client.user}')
-    print('Ready to go@')
-
-client.run(TOKEN)
+    print('Ready to go!')
 
 @client.event
 async def on_message(message):
+    """This function runs every time a message is sent."""
+    # Ignore messages sent by the bot itself to prevent loops
     if message.author == client.user:
         return
 
@@ -28,3 +29,6 @@ async def on_message(message):
 
     if message.content.startswith('!bye'):
         await message.channel.send('Goodbye! See you next time!')
+
+# This line MUST be the last thing to run
+client.run(TOKEN)
